@@ -24,6 +24,13 @@ function leggTilBillett(){
         telefon: document.getElementById("telefonnr").value,
         epost: document.getElementById("epost").value
     };
+    billetter.push(billett);
+    for (let i = eksisterendeBilletter; i < billetter.length; i++) {
+        let nyttAvsnitt = document.createElement("p");
+        nyttAvsnitt.textContent = "Film: " + billetter[i].film + ", antall: " + billetter[i].antall + ", navn: " + billetter[i].navn + " " + billetter[i].etternavn + ", telefonnummer: " + billetter[i].telefon + ", epost: " + billetter[i].epost;
+        document.getElementById("billetter").appendChild(nyttAvsnitt);
+        document.getElementById("billetter").appendChild(document.createElement("br"));
+    }
     document.getElementById("film").value = "";
     document.getElementById("antall").value = "";
     document.getElementById("fornavn").value = "";
@@ -50,4 +57,22 @@ function leggTilBillett(){
     if (document.getElementById("antall").value === ""){
         document.getElementById("feilantall").innerText = "Må skrive inn antall"
     }
+}
+function validerTelefon(telefon){
+    let regex = /^[0-9]{8}$/;
+    if (regex.test(telefon)){
+        return true;
+    }
+}
+function validerEpost(epost){
+    let regex = /^[a-zA-Z0-9. _-]+@[a-zA-Z0-9. -]+\. [a-zA-Z]{2,4}$/
+    if (regex.test(epost)){
+        return true;
+    }
+}
+function slettBillett(){
+    while(billetter.length !==0){
+        billetter.pop();
+    }
+    document.getElementById("billetter").innerHTML = "";
 }
