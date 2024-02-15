@@ -14,8 +14,7 @@ function leggTilBillett(){
         return;
     }
     let eksisterendeBilletter = billetter.length; // Lagrer antall billetter allerede skrevet ut
-    // Array med navn på filmer indeksert tilsvarende verdier i "filmer"-select
-    const filmer = ["Dune 2", "Batman", "Cars", "Avatar"];
+        //Oppretter et billett objekt fra input
     const billett = {
         film: document.getElementById("film").value,
         antall: document.getElementById("antall").value,
@@ -24,6 +23,7 @@ function leggTilBillett(){
         telefon: document.getElementById("telefonnr").value,
         epost: document.getElementById("epost").value
     };
+            //Legger til billett objektet i billetter arrayet
     billetter.push(billett);
     for (let i = eksisterendeBilletter; i < billetter.length; i++) {
         let nyttAvsnitt = document.createElement("p");
@@ -31,13 +31,14 @@ function leggTilBillett(){
         document.getElementById("billetter").appendChild(nyttAvsnitt);
         document.getElementById("billetter").appendChild(document.createElement("br"));
     }
+    //resetter input feltene etter at billetter er kjøpt.
     document.getElementById("film").value = "";
     document.getElementById("antall").value = "";
     document.getElementById("fornavn").value = "";
     document.getElementById("etternavn").value = "";
     document.getElementById("telefonnr").value = "";
     document.getElementById("epost").value = "";
-
+    // setter opp melding hvis bruker prøver å kjøpe billetter med et tomt felt
     if (document.getElementById("fornavn").value === ""){
         document.getElementById("feilNavn").innerText = "Må skrive inn fornavn"
     }
@@ -58,18 +59,21 @@ function leggTilBillett(){
         document.getElementById("feilantall").innerText = "Må skrive inn antall"
     }
 }
+//funksjon som valider telefonnummeret
 function validerTelefon(telefon){
     let regex = /^[0-9]{8}$/;
     if (regex.test(telefon)){
         return true;
     }
 }
+//funksjon som validerer epost addressen
 function validerEpost(epost){
     let regex = /^[a-zA-Z0-9. _-]+@[a-zA-Z0-9. -]+\. [a-zA-Z]{2,4}$/
     if (regex.test(epost)){
         return true;
     }
 }
+//funksjon som sletter billetten
 function slettBillett(){
     while(billetter.length !==0){
         billetter.pop();
